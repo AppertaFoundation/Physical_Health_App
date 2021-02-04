@@ -1,0 +1,26 @@
+#build comms library
+FROM node:10.15 as commsbuilder
+RUN mkdir /usr/src/app
+WORKDIR /usr/src/app
+COPY ./commsLib ./
+RUN ["npm", "pack"]
+
+# build app
+FROM node:10.15 as appbuilder
+RUN mkdir /usr/src/app
+RUN mkdir /usr/src/app/lib
+WORKDIR /usr/src/app
+COPY ./CliniciansPortal/package*.json ./
+COPY --from=commsBuilder /usr/src/app/nhsphysicalhealthcomms-*.tgz ./lib/
+RUN echo $(ls ./lib/*.tgz | head -n1) > ./libver
+RUN npm install $(cat ./libver)
+RUN npm install
+RUN rm ./libver
+COPY ./CliniciansPortal/ ./
+RUN npm run build
+
+# production
+FROM nginx:1.15-alpine
+COPY --from=appbuilder /usr/src/app/build /usr/share/nginx/html
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]

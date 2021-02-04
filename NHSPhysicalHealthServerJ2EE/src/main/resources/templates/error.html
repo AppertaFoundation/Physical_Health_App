@@ -1,0 +1,13 @@
+<!doctype html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      th:with="header='Error'"
+      layout:decorate="~{layout}">
+    <head/>
+    <body>
+        <section layout:fragment="content">
+            <p>A <span th:text="${status}"></span> error has occurred</p>
+        </section>
+    </body>
+</html>

@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      th:with="header='Manage Page \'' + ${page.name} + '\''"
+      layout:decorate="~{cms/layout}">
+<head/>
+<body>
+    <span layout:fragment="headerButtons">
+        <form method="POST" th:action="@{''}" style="display:inline" target="_blank">
+            <button title="edit page info" style="padding:0" type="submit" name="action" value="editPageInfo" class="btn btn-outline-link far fa-edit"></button>
+            <button title="preview" style="padding:0" type="submit" name="action" value="preview" class="btn btn-outline-link fas fa-search"></button>
+        </form>
+    </span>
+
+    <section layout:fragment="content">
+
+        <h3>Fragments</h3>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Position</th>
+                <th>API</th>
+                <th>Condition/Topic</th>
+                <th>Section</th>
+                <th>Entity</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:if="${page.fragments.empty}">
+                <td colspan="2">No Fragments Defined</td>
+            </tr>
+            <tr th:each="fragment,iter : ${page.fragments}">
+                <td><span th:text="${iter.index + 1}"></span></td>
+                <td><span th:text="${fragment.api}"></span></td>
+                <td>
+                    <span th:text="${fragment.primaryEntityName}"></span>
+                    <span id="secondaryEntity" th:if="${fragment.secondaryEntityName != ''}">
+                        , <span th:text="${fragment.secondaryEntityName}"></span>
+                    </span>
+                </td>
+                <td><span th:text="${fragment.jsonSectionHeading}"></span></td>
+                <td><span th:text="${fragment.jsonMainEntityPosition}"></span></td>
+                <td>
+                    <form method="POST" th:action="@{''}">
+                        <input type="hidden" name="index" th:attr="value=${iter.index}" />
+                        <button type="submit" name="action" value="moveFragmentDown" class="btn btn-primary">Down</button>
+                        <button type="submit" name="action" value="moveFragmentUp" class="btn btn-primary">Up</button>
+                        <button type="submit" name="action" value="editFragment" class="btn btn-primary">Edit</button>
+                        <button type="submit" name="action" value="deleteFragment" onclick="return confirm('Are you sure you want to delete the fragment?')" class="btn btn-primary">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <form method="POST" th:action="@{''}">
+            <button type="submit" value="addConditionsFragment" name="addConditionsFragment" class="btn btn-primary">Add Conditions Content</button>
+            <button type="submit" value="addLiveWellFragment" name="addLiveWellFragment" class="btn btn-primary">Add Live Well Content</button>
+        </form>
+
+        <br/>
+
+        <h3 th:text="${page.linksHeader}">>Links</h3>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Position</th>
+                <th>URL</th>
+                <th>Label</th>
+                <th>Description</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:if="${page.links.empty}">
+                <td colspan="4">No Links Defined</td>
+            </tr>
+            <tr th:each="link,iter : ${page.links}">
+                <td><span th:text="${iter.index + 1}"></span></td>
+                <td><a th:attr="href=${link.url}" th:text="${link.url}"></a></td>
+                <td><span th:text="${link.label}"></span></td>
+                <td><span th:text="${link.description}"></span></td>
+                <td>
+                    <form method="POST" th:action="@{''}">
+                        <input type="hidden" name="index" th:attr="value=${iter.index}" />
+                        <button type="submit" name="action" value="moveLinkDown" class="btn btn-primary">Down</button>
+                        <button type="submit" name="action" value="moveLinkUp" class="btn btn-primary">Up</button>
+                        <button type="submit" name="action" value="editLink" class="btn btn-primary">Edit</button>
+                        <button type="submit" name="action" value="deleteLink" onclick="return confirm('Are you sure you want to delete the link?')" class="btn btn-primary">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <form method="POST" th:action="@{''}">
+            <button type="submit" name="addLink" value="addLink" class="btn btn-primary">Add Link</button>
+        </form>
+
+    </section>
+
+</body>
+
+</html>

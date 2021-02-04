@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      th:with="header='\'' + ${page.name} + '\' Preview'"
+      layout:decorate="~{cms/layoutSimple}">
+<head/>
+    <body>
+        <section layout:fragment="content">
+            <h3>Load Log</h3>
+
+            <hr/>
+
+            <ul class="loadLog" th:each="log : ${loadLog.logs}">
+                <div th:remove="tag" th:switch="${log.severity.name()}">
+                    <li th:case="${'INFO'}" th:text="${log.message}"></li>
+                    <li th:case="${'ERROR'}" style="color: red" th:text="${log.message}"></li>
+                </div>
+            </ul>
+
+            <h3>Page Content</h3>
+
+            <hr/>
+
+            <div class="pageContent">
+                <div th:remove="tag" th:utext="${html}"></div>
+            </div>
+
+        </section>
+    </body>
+</html>

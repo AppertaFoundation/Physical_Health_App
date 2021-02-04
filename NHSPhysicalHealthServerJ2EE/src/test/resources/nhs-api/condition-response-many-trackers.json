@@ -1,0 +1,193 @@
+{
+  "relatedLink": [
+    {
+      "alternativeHeadline": "Overview",
+      "url": "/conditions/example/",
+      "@type": "LinkRole",
+      "name": "Example",
+      "linkRelationship": "Navigation"
+    }
+  ],
+  "@context": "http://schema.org",
+  "genre": "condition",
+  "breadcrumb": {
+    "itemListElement": [
+      {
+        "item": {
+          "@id": "/conditions/",
+          "name": "Health A-Z"
+        },
+        "@type": "ListItem",
+        "position": 0
+      },
+      {
+        "item": {
+          "@id": "/conditions/example/",
+          "name": "Example"
+        },
+        "@type": "ListItem",
+        "position": 1
+      }
+    ],
+    "@context": "http://schema.org",
+    "@type": "BreadcrumbList"
+  },
+  "dateModified": "2019-01-18T15:52:07.352908+00:00",
+  "copyrightHolder": {
+    "@type": "Organization",
+    "name": "Apperta Unit Test"
+  },
+  "license": "https://apperta.staircase13.com/terms",
+  "alternateName": [
+    "TestFixture"
+  ],
+  "@type": "MedicalWebPage",
+  "author": {
+    "url": "https://apperta.staircase13.com",
+    "logo": "https://apperta.staircase13.com/logo1.jpg",
+    "@type": "Organization",
+    "name": "Apperta",
+    "email": "test@localhost"
+  },
+  "interactionStatistic": [
+    {
+      "@type": "InteractionCounter",
+      "interactionService": {
+        "url": "<img style='border: 0; width: 1px; height: 1px;' alt='' src='https://localhost/dcs2221tai1ckz5huxw0mfq86_1m2w/njs.gif?dcsuri=example/flu&wt.cg_n=Syndication'/> <img style='border: 0; width: 1px; height: 1px;' alt='' src='https://localhost/b/ss/nhsuk-prod/1/JS-2.9.0-L8UK/654321?c27=e5423fc0-1b18-11e9-a292-29e11fde9604'/>",
+        "@type": "Website",
+        "name": "Webtrends tracking pixel"
+      }
+    },
+    {
+      "@type": "InteractionCounter",
+      "interactionService": {
+        "url": "<img style='border: 0; width: 1px; height: 1px;' alt='' src='https://localhost/othertracker/njs.gif?dcsuri=example/flu&wt.cg_n=Syndication'/> <img style='border: 0; width: 1px; height: 1px;' alt='' src='https://othertracker/b/ss/nhsuk-prod/1/JS-2.9.0-L8UK/654321?c27=e5423fc0-1b18-11e9-a292-29e11fde9604'/>",
+        "@type": "Website",
+        "name": "Webtrends tracking pixel"
+      }
+    }
+  ],
+  "mainEntityOfPage": [
+    {
+      "mainEntityOfPage": [
+        {
+          "text": "<p>First Main Entity, no Header</p>\n",
+          "@type": "WebPageElement",
+          "identifier": "1",
+          "name": "markdown",
+          "position": 0
+        }
+      ],
+      "position": 0,
+      "text": "",
+      "identifier": "0",
+      "@type": "WebPageElement",
+      "name": "section heading"
+    },
+    {
+      "mainEntityOfPage": [
+        {
+          "text": "<p>Some other Main Entity</p>\n",
+          "@type": "WebPageElement",
+          "identifier": "1",
+          "name": "markdown",
+          "position": 0
+        },
+        {
+          "position": 1,
+          "mainEntity": [
+            {
+              "text": "<p>Child Entity of Main Entity</p>\n",
+              "@type": "WebPageElement",
+              "identifier": "1",
+              "name": "markdown",
+              "position": 0
+            }
+          ],
+          "@type": "WebPageElement",
+          "subjectOf": "A Reveal",
+          "identifier": "11",
+          "name": "Reveal"
+        },
+        {
+          "text": "<p>Some other Main Entity</p>\n",
+          "@type": "WebPageElement",
+          "identifier": "1",
+          "name": "markdown",
+          "position": 2
+        }
+      ],
+      "position": 1,
+      "text": "Main Entity with Child Entity",
+      "identifier": "0",
+      "@type": "WebPageElement",
+      "name": "section heading"
+    },
+    {
+      "mainEntityOfPage": [
+        {
+          "text": "<p>One Main Entity, No Child Content. <strong>Position 0</strong></p>\n",
+          "@type": "WebPageElement",
+          "identifier": "1",
+          "name": "markdown",
+          "position": 0
+        },
+        {
+          "text": "<p>One Main Entity, No Child Content. <strong>Position 1</strong></p>\n",
+          "@type": "WebPageElement",
+          "identifier": "1",
+          "name": "markdown",
+          "position": 1
+        }
+      ],
+      "position": 2,
+      "text": "One Main Entity, No Children",
+      "identifier": "0",
+      "@type": "WebPageElement",
+      "name": "section heading"
+    },
+    {
+      "mainEntityOfPage": [
+        {
+          "text": "<p>Main entity for section heading with single quotes</p>\n",
+          "@type": "WebPageElement",
+          "identifier": "1",
+          "name": "markdown",
+          "position": 0
+        }
+      ],
+      "position": 3,
+      "text": "Section heading with 'single quotes'",
+      "identifier": "0",
+      "@type": "WebPageElement",
+      "name": "section heading"
+    },
+    {
+      "mainEntityOfPage": [
+        {
+          "text": "<p>Some content with a <a href=\"/path/to/link.html\">link</a> to somewhere</p>\n",
+          "@type": "WebPageElement",
+          "identifier": "1",
+          "name": "markdown",
+          "position": 0
+        }
+      ],
+      "position": 0,
+      "text": "Section with Link",
+      "identifier": "0",
+      "@type": "WebPageElement",
+      "name": "section heading"
+    }
+  ],
+  "keywords": [
+    "Influenza (seasonal)"
+  ],
+  "alternativeHeadline": "Overview",
+  "description": "An example page used for unit test",
+  "url": "https://localhost/conditions/example/",
+  "name": "Example",
+  "lastReviewed": [
+    "2017-12-12T00:00:00+00:00",
+    "2020-12-12T00:00:00+00:00"
+  ]
+}

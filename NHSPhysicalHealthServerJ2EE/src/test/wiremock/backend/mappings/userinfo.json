@@ -1,0 +1,21 @@
+{
+  "request": {
+    "method": "GET",
+    "urlPath": "/user",
+    "queryParameters" : {
+      "username": {
+        "matches": "^.*$"
+      }}
+    },
+  "response": {
+    "transformers": ["response-template"],
+    "status": 200,
+    "jsonBody": {
+       "title": "Mr",
+       "japaneseHonorific": "{{request.query.username.[0]}}San"
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  }
+}

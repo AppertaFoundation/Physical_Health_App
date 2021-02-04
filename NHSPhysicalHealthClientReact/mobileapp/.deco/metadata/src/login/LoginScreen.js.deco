@@ -1,0 +1,134 @@
+{
+	"liveValues": [
+		{
+			"range": {
+				"from": {
+					"line": 132,
+					"ch": 22
+				},
+				"to": {
+					"line": 132,
+					"ch": 27
+				}
+			},
+			"type": "boolean",
+			"name": "Horizontal",
+			"group": "SCROLL VIEW"
+		},
+		{
+			"range": {
+				"from": {
+					"line": 137,
+					"ch": 21
+				},
+				"to": {
+					"line": 137,
+					"ch": 28
+				}
+			},
+			"editWith": "colorPicker",
+			"type": "string",
+			"name": "Color",
+			"group": "TEXT"
+		},
+		{
+			"range": {
+				"from": {
+					"line": 139,
+					"ch": 26
+				},
+				"to": {
+					"line": 139,
+					"ch": 32
+				}
+			},
+			"editWith": "dropdown",
+			"dropdownOptions": "FontWeight",
+			"type": "string",
+			"name": "FontWeight",
+			"group": "TEXT"
+		},
+		{
+			"range": {
+				"from": {
+					"line": 140,
+					"ch": 26
+				},
+				"to": {
+					"line": 140,
+					"ch": 42
+				}
+			},
+			"editWith": "dropdown",
+			"dropdownOptions": "FontFamily",
+			"type": "string",
+			"name": "FontFamily",
+			"group": "TEXT"
+		},
+		{
+			"range": {
+				"from": {
+					"line": 150,
+					"ch": 21
+				},
+				"to": {
+					"line": 150,
+					"ch": 28
+				}
+			},
+			"editWith": "colorPicker",
+			"type": "string",
+			"name": "Color",
+			"group": "TEXT 2"
+		},
+		{
+			"range": {
+				"from": {
+					"line": 151,
+					"ch": 24
+				},
+				"to": {
+					"line": 151,
+					"ch": 26
+				}
+			},
+			"type": "number",
+			"name": "FontSize",
+			"group": "TEXT 2"
+		},
+		{
+			"range": {
+				"from": {
+					"line": 152,
+					"ch": 26
+				},
+				"to": {
+					"line": 152,
+					"ch": 34
+				}
+			},
+			"editWith": "dropdown",
+			"dropdownOptions": "FontWeight",
+			"type": "string",
+			"name": "FontWeight",
+			"group": "TEXT 2"
+		},
+		{
+			"range": {
+				"from": {
+					"line": 153,
+					"ch": 26
+				},
+				"to": {
+					"line": 153,
+					"ch": 42
+				}
+			},
+			"editWith": "dropdown",
+			"dropdownOptions": "FontFamily",
+			"type": "string",
+			"name": "FontFamily",
+			"group": "TEXT 2"
+		}
+	]
+}

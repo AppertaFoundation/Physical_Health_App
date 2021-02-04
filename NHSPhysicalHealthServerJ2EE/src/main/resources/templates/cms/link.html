@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      th:with="header='Manage Link'"
+      layout:decorate="~{cms/layout}">
+<head/>
+<body>
+<section layout:fragment="content">
+
+    <form th:action="@{''}" th:object="${link}" method="POST">
+
+        <div  th:if="${#fields.hasErrors('global')}" th:errors="*{global}" class="alert alert-danger" role="alert"></div>
+
+        <div class="form-group">
+            <label for="url">URL *</label>
+            <input th:field="*{url}"
+                   th:classappend="${#fields.hasErrors('url')} ? 'is-invalid' : ''"
+                   type="text"
+                   class="form-control"
+                   id="url"
+                   placeholder="URL">
+            <div th:if="${#fields.hasErrors('url')}" th:errors="*{url}" class="invalid-feedback"></div>
+        </div>
+
+        <div class="form-group">
+            <label for="label">Label *</label>
+            <input th:field="*{label}"
+                   th:classappend="${#fields.hasErrors('label')} ? 'is-invalid' : ''"
+                   type="text"
+                   class="form-control"
+                   id="label"
+                   placeholder="Label">
+            <div th:if="${#fields.hasErrors('label')}" th:errors="*{label}" class="invalid-feedback"></div>
+        </div>
+
+        <div class="form-group">
+            <label for="label">Description *</label>
+            <textarea th:field="*{description}"
+                   th:classappend="${#fields.hasErrors('description')} ? 'is-invalid' : ''"
+                   class="form-control"
+                   id="description"
+                   placeholder="Description"></textarea>
+            <div th:if="${#fields.hasErrors('description')}" th:errors="*{description}" class="invalid-feedback"></div>
+        </div>
+
+        <button type="submit" value="cancel" name="action" class="btn btn-primary">Cancel</button>
+        <button type="submit" value="submitLink" name="action" class="btn btn-primary">Submit</button>
+
+    </form>
+
+</section>
+
+</body>
+
+</html>

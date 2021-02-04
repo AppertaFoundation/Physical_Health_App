@@ -1,0 +1,48 @@
+{
+  "name": "GMMHMonitor",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "test": "jest"
+  },
+  "dependencies": {
+    "jsc-android": "^241213.1.0",
+    "nhsphysicalhealthcomms": "file:../commsLib/nhsphysicalhealthcomms-1.0.110.tgz",
+    "react": "16.8.6",
+    "react-native": "0.60.1",
+    "react-native-base64": "0.0.2",
+    "react-native-calendars": "^1.212.0",
+    "react-native-chart-kit": "^2.0.1",
+    "react-native-check-box": "^2.1.7",
+    "react-native-dialog": "^5.6.0",
+    "react-native-gesture-handler": "^1.0.14",
+    "react-native-keyboard-aware-scrollview": "^2.1.0",
+    "react-native-linear-gradient": "^2.5.6",
+    "react-native-material-buttons": "^0.5.0",
+    "react-native-material-textfield": "^0.12.0",
+    "react-native-modal-datetime-picker": "^6.0.0",
+    "react-native-modal-filter-picker": "^2.0.0",
+    "react-native-splash-screen": "^3.2.0",
+    "react-native-svg": "^9.0.4",
+    "react-native-vector-icons": "^6.2.0",
+    "react-navigation": "^3.0.9",
+    "react-redux": "^6.0.0",
+    "redux": "^4.0.1",
+    "redux-persist": "^5.10.0",
+    "redux-persist-transform-filter": "0.0.18",
+    "redux-thunk": "^2.3.0",
+    "victory-native": "^31.0.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.4.3",
+    "@babel/runtime": "^7.4.3",
+    "babel-jest": "^24.7.1",
+    "jest": "^24.7.1",
+    "metro-react-native-babel-preset": "^0.53.1",
+    "react-test-renderer": "16.8.3"
+  },
+  "jest": {
+    "preset": "react-native"
+  }
+}

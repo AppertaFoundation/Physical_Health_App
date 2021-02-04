@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+              integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+        <title th:text="${header}"></title>
+
+        <style type="text/css">
+            .content {
+                   padding: 0 15px;
+            }
+        </style>
+    </head>
+    <body style="padding: 1em">
+
+        <div class="container">
+
+            <h1 style="display:none">CMS</h1>
+            <h2 th:text="${header}" style="padding-left:15px; display: inline-block"></h2>
+
+            <span layout:fragment="headerButtons"></span>
+
+            <p style="margin-right:17px; float:right">User: <span sec:authentication="name">Bob</span></p>
+
+            <nav class="navbar navbar-expand-lg navbar-light bg-light" style="margin-bottom: 1em">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="/cms/pages">Show All Pages</a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="/cms/addPage">Add New Page</a>
+                        </li>
+                    </ul>
+                    <form class="form-inline my-2 my-lg-0" th:action="@{/cms/actions}" method="POST">
+                        <button style="margin-right: 1em" class="btn btn-info my-2 my-sm-0" name="action" value="viewLoadLog" type="submit">View Load Log</button>
+                        <button style="margin-right: 1em" class="btn btn-info my-2 my-sm-0" name="action" value="downloadTar" type="submit">Download TAR</button>
+                        <button style="margin-right: 1em" class="btn btn-info my-2 my-sm-0" name="action" value="flushCache" type="submit">Flush Cache</button>
+
+                        <div th:switch="${cmsUiSession.modified}">
+                            <button th:case="false" class="btn btn-outline-secondary my-2 my-sm-0" name="action" value="commitChanges" type="submit" disabled="disabled">Commit Changes</button>
+                            <button th:case="true" class="btn btn-warning my-2 my-sm-0" name="action" value="commitChanges" type="submit">Commit Changes <span class="badge badge-light">!</span></button>
+                        </div>
+                    </form>
+                </div>
+
+            </nav>
+
+            <div class="alert alert-success" role="alert" th:if="${message}" th:text="${message}"></div>
+            <div class="alert alert-error" role="alert" th:if="${errorMessage}" th:text="${errorMessage}"></div>
+
+            <div class="content">
+                <div layout:fragment="content"></div>
+            </div>
+        </div>
+
+    </body>
+</html>

@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!DOCTYPE import-control PUBLIC
+        "-//Checkstyle//DTD ImportControl Configuration 1.4//EN"
+        "https://checkstyle.org/dtds/import_control_1_4.dtd">
+
+<import-control pkg="com.staircase13.apperta">
+    <allow pkg=".*" regex="true"/>
+    <allow pkg="java.util"/>
+    <subpackage name="service">
+        <disallow pkg="com.staircase13.apperta.ehrconnector.impls.demographics.MarandDemographics"/>
+        <disallow pkg="com.staircase13.apperta.ehrconnector.impls.ehr.MarandFlat"/>
+    </subpackage>
+</import-control>
