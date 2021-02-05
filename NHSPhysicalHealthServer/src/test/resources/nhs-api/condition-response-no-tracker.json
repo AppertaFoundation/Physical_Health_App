@@ -1,0 +1,81 @@
+{
+  "relatedLink": [
+    {
+      "alternativeHeadline": "Overview",
+      "url": "/conditions/example/",
+      "@type": "LinkRole",
+      "name": "Example",
+      "linkRelationship": "Navigation"
+    }
+  ],
+  "@context": "http://schema.org",
+  "genre": "condition",
+  "breadcrumb": {
+    "itemListElement": [
+      {
+        "item": {
+          "@id": "/conditions/",
+          "name": "Health A-Z"
+        },
+        "@type": "ListItem",
+        "position": 0
+      },
+      {
+        "item": {
+          "@id": "/conditions/example/",
+          "name": "Example"
+        },
+        "@type": "ListItem",
+        "position": 1
+      }
+    ],
+    "@context": "http://schema.org",
+    "@type": "BreadcrumbList"
+  },
+  "dateModified": "2019-01-18T15:52:07.352908+00:00",
+  "copyrightHolder": {
+    "@type": "Organization",
+    "name": "Apperta Unit Test"
+  },
+  "license": "https://apperta.staircase13.com/terms",
+  "alternateName": [
+    "TestFixture"
+  ],
+  "@type": "MedicalWebPage",
+  "author": {
+    "url": "https://apperta.staircase13.com",
+    "logo": "https://apperta.staircase13.com/logo1.jpg",
+    "@type": "Organization",
+    "name": "Apperta",
+    "email": "test@localhost"
+  },
+  "mainEntityOfPage": [
+    {
+      "mainEntityOfPage": [
+        {
+          "text": "<p>First Main Entity, no Header</p>\n",
+          "@type": "WebPageElement",
+          "identifier": "1",
+          "name": "markdown",
+          "position": 0
+        }
+      ],
+      "position": 0,
+      "text": "",
+      "identifier": "0",
+      "@type": "WebPageElement",
+      "name": "section heading"
+    }
+  ],
+  "keywords": [
+    "Influenza (seasonal)"
+  ],
+  "alternativeHeadline": "Overview",
+  "description": "An example page used for unit test",
+  "url": "https://localhost/conditions/example/",
+  "name": "Example",
+  "lastReviewed": [
+    "2017-12-12T00:00:00+00:00",
+    "2020-12-12T00:00:00+00:00"
+  ]
+}

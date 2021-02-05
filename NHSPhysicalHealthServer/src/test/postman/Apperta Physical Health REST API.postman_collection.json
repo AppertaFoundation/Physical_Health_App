@@ -1,0 +1,753 @@
+{
+	"info": {
+		"_postman_id": "1eb35bfb-d8e3-41ec-b946-67f1dd3a89a8",
+		"name": "Apperta Physical Health REST API",
+		"description": "Description TBD",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Testing",
+			"item": [
+				{
+					"name": "Create Test Users",
+					"item": [
+						{
+							"name": "Register HCP User 1",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\": \"{{hcp1Username}}\",\n    \"password\": \"{{hcp1Password}}\",\n    \"role\": \"HCP\",\n    \"emailAddress\": \"hcp@localhost\"\n}"
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/user/register",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"user",
+										"register"
+									]
+								},
+								"description": "Used to register new users in the system"
+							},
+							"response": []
+						},
+						{
+							"name": "Register Admin User 1",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\": \"{{admin1Username}}\",\n    \"password\": \"{{admin1Password}}\",\n    \"role\": \"ADMIN\",\n    \"emailAddress\": \"admin@localhost\"\n}"
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/user/register",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"user",
+										"register"
+									]
+								},
+								"description": "Used to register new users in the system"
+							},
+							"response": []
+						},
+						{
+							"name": "Register HCP User 2",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\": \"{{hcp2Username}}\",\n    \"password\": \"{{hcp2Password}}\",\n    \"role\": \"HCP\",\n    \"emailAddress\": \"hcp2@localhost\"\n}"
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/user/register",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"user",
+										"register"
+									]
+								},
+								"description": "Used to register new users in the system"
+							},
+							"response": []
+						},
+						{
+							"name": "Register Patient User",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\": \"{{patientUsername}}\",\n    \"password\": \"{{patientPassword}}\",\n    \"role\": \"PATIENT\",\n    \"emailAddress\": \"patient@localhost\"\n}"
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/user/register",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"user",
+										"register"
+									]
+								},
+								"description": "Used to register new users in the system"
+							},
+							"response": []
+						}
+					],
+					"auth": {
+						"type": "oauth2",
+						"oauth2": [
+							{
+								"key": "accessToken",
+								"value": "{{clientAccessToken}}",
+								"type": "string"
+							},
+							{
+								"key": "addTokenTo",
+								"value": "header",
+								"type": "string"
+							}
+						]
+					},
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "8a2175ec-e483-49ff-80b7-dc5852163e1a",
+								"type": "text/javascript",
+								"exec": [
+									"var CryptoJS = require(\"crypto-js\");",
+									"",
+									"var rawStr = CryptoJS.enc.Utf8.parse(",
+									"   pm.variables.get('oauthBasicAuthUser') + \":\" + pm.variables.get('oauthBasicAuthPassword'));",
+									"",
+									"var base64 = CryptoJS.enc.Base64.stringify(rawStr);",
+									"console.log(base64);",
+									"",
+									"function requestOauthToken(type) {",
+									"",
+									"    const hcpPostRequest = {",
+									"      url: 'http://localhost:8080/oauth/token',",
+									"      method: 'POST',",
+									"      header: {",
+									"          'Content-Type':'application/x-www-form-urlencoded',",
+									"          'Authorization': 'Basic ' + base64,",
+									"      },",
+									"      body: {",
+									"        mode: 'urlencoded',",
+									"          urlencoded: [",
+									"            {key: \"grant_type\", value: \"client_credentials\", disabled: false}",
+									"        ]",
+									"      }",
+									"    };",
+									"    ",
+									"    var getToken = true;",
+									"    ",
+									"    if (!pm.environment.get(type + \"AccessTokenExpiry\") || ",
+									"        !pm.environment.get(type + \"CurrentAccessToken\")) {",
+									"        console.log('Token or expiry date are missing')",
+									"    } else if (pm.environment.get(type + \"AccessTokenExpiry\") <= (new Date()).getTime()) {",
+									"        console.log('Token is expired')",
+									"    } else {",
+									"        getToken = false;",
+									"        console.log('Token and expiry date are all good');",
+									"    }",
+									"    ",
+									"    if (getToken === true) {",
+									"        pm.sendRequest(hcpPostRequest, function (err, res) {",
+									"        console.log(err ? err : res.json());",
+									"            if (err === null) {",
+									"                var responseJson = res.json();",
+									"                console.log('Saving the token and expiry date to ' + (type + \"AccessToken\") + '. Token is ' + responseJson.access_token)",
+									"                pm.environment.set(type + \"AccessToken\", responseJson.access_token)",
+									"                ",
+									"                var expiryDate = new Date();",
+									"                expiryDate.setSeconds(expiryDate.getSeconds() + responseJson.expires_in);",
+									"                pm.environment.set(type + \"AccessTokenExpiry\", expiryDate.getTime());",
+									"            } else {",
+									"                console.log(\"OAuth failed. Error follows\");",
+									"                console.log(err);",
+									"            }",
+									"        });",
+									"    }",
+									"",
+									"}",
+									"",
+									"requestOauthToken(\"client\")"
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "41af30fa-e345-4727-9028-1ae6ad229bb5",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Tests with Auth",
+					"item": [
+						{
+							"name": "HCP",
+							"item": [
+								{
+									"name": "Get HCP Profile",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "d975177e-8021-4e8c-8d21-f0bf4451f2ca",
+												"exec": [
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "oauth2",
+											"oauth2": [
+												{
+													"key": "accessToken",
+													"value": "{{hcp1AccessToken}}",
+													"type": "string"
+												},
+												{
+													"key": "addTokenTo",
+													"value": "header",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "http://localhost:8080/api/user/hcp/profile?Authorization=Bearer {{currentAccessToken}}",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"user",
+												"hcp",
+												"profile"
+											],
+											"query": [
+												{
+													"key": "Authorization",
+													"value": "Bearer {{currentAccessToken}}"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Populate HCP Profile",
+									"request": {
+										"auth": {
+											"type": "oauth2",
+											"oauth2": [
+												{
+													"key": "accessToken",
+													"value": "{{hcp1AccessToken}}",
+													"type": "string"
+												},
+												{
+													"key": "addTokenTo",
+													"value": "header",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"email\": \"updatedhcp@localhost\",\n  \"firstNames\": \"hcp\",\n  \"jobTitle\": \"Dr\",\n  \"lastName\": \"hcpee\",\n  \"location\": \"loughborough town\",\n  \"nhsId\": \"NHS123\",\n  \"title\": \"Dr\",\n  \"username\": \"hcp1\"\n}"
+										},
+										"url": {
+											"raw": "http://localhost:8080/api/user/hcp/profile",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"user",
+												"hcp",
+												"profile"
+											]
+										},
+										"description": "Create or Update HCP information for the authenticated HCP. Caller must have the 'HCP' role"
+									},
+									"response": []
+								},
+								{
+									"name": "Search for HCP",
+									"request": {
+										"auth": {
+											"type": "oauth2",
+											"oauth2": [
+												{
+													"key": "accessToken",
+													"value": "{{patientAccessToken}}",
+													"type": "string"
+												},
+												{
+													"key": "addTokenTo",
+													"value": "header",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "http://localhost:8080/api/user/hcp/search?nhsId=NHS123",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"user",
+												"hcp",
+												"search"
+											],
+											"query": [
+												{
+													"key": "nhsId",
+													"value": "NHS123"
+												}
+											]
+										},
+										"description": "Find an HCP using the corresponding NHS ID. Callers must have the 'Patient' role"
+									},
+									"response": []
+								}
+							],
+							"auth": {
+								"type": "oauth2",
+								"oauth2": [
+									{
+										"key": "addTokenTo",
+										"value": "header",
+										"type": "string"
+									}
+								]
+							},
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "c1a4d413-fd94-4513-b110-081edfbdf076",
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "2b96ed45-814b-459b-93d4-5f52e8dff65b",
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							],
+							"_postman_isSubFolder": true
+						},
+						{
+							"name": "Patients",
+							"item": [
+								{
+									"name": "Get Patients",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "d975177e-8021-4e8c-8d21-f0bf4451f2ca",
+												"exec": [
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "oauth2",
+											"oauth2": [
+												{
+													"key": "accessToken",
+													"value": "{{hcp1AccessToken}}",
+													"type": "string"
+												},
+												{
+													"key": "addTokenTo",
+													"value": "header",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "http://localhost:8080/api/patients?start=1&pageSize=5&Authorization=Bearer {{currentAccessToken}}",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"patients"
+											],
+											"query": [
+												{
+													"key": "start",
+													"value": "1"
+												},
+												{
+													"key": "pageSize",
+													"value": "5"
+												},
+												{
+													"key": "Authorization",
+													"value": "Bearer {{currentAccessToken}}"
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							],
+							"auth": {
+								"type": "oauth2",
+								"oauth2": [
+									{
+										"key": "addTokenTo",
+										"value": "header",
+										"type": "string"
+									}
+								]
+							},
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "c1a4d413-fd94-4513-b110-081edfbdf076",
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "2b96ed45-814b-459b-93d4-5f52e8dff65b",
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							],
+							"_postman_isSubFolder": true
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "bcc5ddea-16e5-4b8f-9868-27bdba505d25",
+								"type": "text/javascript",
+								"exec": [
+									"var CryptoJS = require(\"crypto-js\");",
+									"",
+									"var rawStr = CryptoJS.enc.Utf8.parse(",
+									"   pm.variables.get('oauthBasicAuthUser') + \":\" + pm.variables.get('oauthBasicAuthPassword'));",
+									"",
+									"var base64 = CryptoJS.enc.Base64.stringify(rawStr);",
+									"console.log(base64);",
+									"",
+									"function requestOauthToken(type) {",
+									"",
+									"    const hcpPostRequest = {",
+									"      url: 'http://localhost:8080/oauth/token',",
+									"      method: 'POST',",
+									"      header: {",
+									"          'Content-Type':'application/x-www-form-urlencoded',",
+									"          'Authorization': 'Basic ' + base64,",
+									"      },",
+									"      body: {",
+									"        mode: 'urlencoded',",
+									"          urlencoded: [",
+									"            {key: \"grant_type\", value: \"password\", disabled: false},",
+									"            {key: \"username\", value: pm.variables.get(type + \"Username\"), disabled: false},",
+									"            {key: \"password\", value: pm.variables.get(type + \"Password\"), disabled: false}",
+									"        ]",
+									"      }",
+									"    };",
+									"    ",
+									"    var getToken = true;",
+									"    ",
+									"    if (!pm.environment.get(type + \"AccessTokenExpiry\") || ",
+									"        !pm.environment.get(type + \"CurrentAccessToken\")) {",
+									"        console.log('Token or expiry date are missing')",
+									"    } else if (pm.environment.get(type + \"AccessTokenExpiry\") <= (new Date()).getTime()) {",
+									"        console.log('Token is expired')",
+									"    } else {",
+									"        getToken = false;",
+									"        console.log('Token and expiry date are all good');",
+									"    }",
+									"    ",
+									"    if (getToken === true) {",
+									"        pm.sendRequest(hcpPostRequest, function (err, res) {",
+									"        console.log(err ? err : res.json());",
+									"            if (err === null) {",
+									"                var responseJson = res.json();",
+									"                console.log('Saving the token and expiry date to ' + (type + \"AccessToken\") + '. Token is ' + responseJson.access_token)",
+									"                pm.environment.set(type + \"AccessToken\", responseJson.access_token)",
+									"                ",
+									"                var expiryDate = new Date();",
+									"                expiryDate.setSeconds(expiryDate.getSeconds() + responseJson.expires_in);",
+									"                pm.environment.set(type + \"AccessTokenExpiry\", expiryDate.getTime());",
+									"            } else {",
+									"                console.log(\"OAuth failed. Error follows\");",
+									"                console.log(err);",
+									"            }",
+									"        });",
+									"    }",
+									"",
+									"}",
+									"",
+									"requestOauthToken(\"hcp1\")",
+									"requestOauthToken(\"hcp2\")",
+									"requestOauthToken(\"patient\")"
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "7a82d6e0-a9e0-425f-83d9-82e32c5bfedc",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "CORs",
+					"item": [
+						{
+							"name": "CORs Test",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": ""
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "9ad63fbb-dcec-4477-aa85-bb673586b341",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "9009a559-cab7-41d8-ba35-3d0e31f224d4",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "648502d9-00ee-4dcd-a60e-4e3dc8cad527",
+			"key": "hcp1Username",
+			"value": "hcp1",
+			"type": "string"
+		},
+		{
+			"id": "650dc9d7-e648-4184-87f3-6a9c3956f925",
+			"key": "hcp1Password",
+			"value": "hcp1Password",
+			"type": "string"
+		},
+		{
+			"id": "ff679479-c9ed-4159-bc3a-c576a8b62eaa",
+			"key": "oauthBasicAuthUser",
+			"value": "my-trusted-client",
+			"type": "string"
+		},
+		{
+			"id": "1d9ca86b-eac5-4788-895f-52684b9477b8",
+			"key": "oauthBasicAuthPassword",
+			"value": "secret",
+			"type": "string"
+		},
+		{
+			"id": "9e2a5361-ca18-443a-9278-29b4212b482c",
+			"key": "patientUsername",
+			"value": "patient1",
+			"type": "string"
+		},
+		{
+			"id": "e99a4827-8864-4933-9e42-ed8420cd911d",
+			"key": "patientPassword",
+			"value": "patient1Password",
+			"type": "string"
+		},
+		{
+			"id": "473506c1-9b2a-415d-8832-875fc18fe5d6",
+			"key": "hcp2Username",
+			"value": "hcp2",
+			"type": "string"
+		},
+		{
+			"id": "13bfb1d3-d336-4f92-95b6-516bfe76aead",
+			"key": "hcp2Password",
+			"value": "hcp2Password",
+			"type": "string"
+		},
+		{
+			"id": "b240ff0c-0eef-45bf-9f8c-737db8fab05e",
+			"key": "admin1Username",
+			"value": "admin1",
+			"type": "string"
+		},
+		{
+			"id": "d08ec236-9476-4a8b-b08a-ad03232ac0ae",
+			"key": "admin1Password",
+			"value": "admin1Password",
+			"type": "string"
+		}
+	]
+}

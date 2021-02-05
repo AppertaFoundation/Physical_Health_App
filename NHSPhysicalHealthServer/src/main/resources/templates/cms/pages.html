@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      th:with="header='Manage Pages'"
+      layout:decorate="~{cms/layout}">
+    <head/>
+    <body>
+        <section layout:fragment="content">
+
+            <form method="POST" th:action="@{''}">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Fragments count</th>
+                        <th>Links count</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:if="${pages.empty}">
+                        <td colspan="2">No Pages Defined</td>
+                    </tr>
+                    <tr th:each="page,iter : ${pages}">
+                        <td><span th:text="${page.name}">Name</span></td>
+                        <td><span th:text="${page.fragments.size()}">Fragments</span></td>
+                        <td><span th:text="${page.links.size()}">Links</span></td>
+                        <td>
+                            <form method="POST" th:action="@{''}">
+                                <input type="hidden" name="name" th:attr="value=${page.name}" />
+                                <button type="submit" name="action" value="editPage" class="btn btn-primary">Edit</button>
+                                <button type="submit" name="action" value="deletePage" class="btn btn-primary" onclick="return confirm('Are you sure you want to delete the page?')">Delete</button>
+                            </form></td>
+                    </tr>
+                    </tbody>
+                </table>
+
+            </form>
+
+        </section>
+
+    </body>
+
+</html>

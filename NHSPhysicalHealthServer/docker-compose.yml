@@ -1,0 +1,54 @@
+version: '3.1'
+
+services:
+
+  harbur:
+    image: harbur/haveged:1.7c-1
+    restart: always
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8081:8080
+
+  apperta:
+    image: staircase13/apperta:0.0.1-SNAPSHOT
+    restart: always
+    ports:
+      - 8080:8080
+    environment:
+      apperta.backend.url: http://backend-wiremock:8080
+      apperta.cms.tar.local.file: /tmp/cms.tar.gz
+      apperta.oauth.client.name: my-trusted-client
+      apperta.oauth.client.password: ENC(Lw++P+MfcmFlymWQpfVJNw==)
+
+      jasypt.encryptor.password: MasterJasyptPassword
+      logging.level.com.staircase13.apperta: DEBUG
+      spring.datasource.url: jdbc:postgresql://db/postgres
+      spring.datasource.username: postgres
+      spring.datasource.password: ENC(pDaM6Pt4N/UtdsIGz1hHcfZsrGmO/nP13h8FDA7+biY=)
+      spring.mail.host: mailhog
+      spring.mail.port: 1025
+
+  backend-wiremock:
+    image: rodolpheche/wiremock
+    restart: always
+    volumes:
+      - ./src/test/wiremock/backend:/config
+    ports:
+      - 8090:8080
+    command: ["--root-dir=/config", --global-response-templating]
+
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: mysecretpassword
+    ports:
+      - 5432:5432
+
+  mailhog:
+    image: mailhog/mailhog
+    ports:
+      - 8025:8025

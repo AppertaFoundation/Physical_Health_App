@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      th:with="header='Manage Fragment'"
+      layout:decorate="~{cms/layout}">
+
+    <head/>
+
+    <body>
+        <section layout:fragment="content">
+
+            <form action="#" th:action="@{''}" th:object="${fragment}" method="POST">
+
+                <div  th:if="${#fields.hasErrors('global')}" th:errors="*{global}" class="alert alert-danger" role="alert"></div>
+
+                <input type="hidden" name="api" th:field="*{api}" />
+
+                <span id="conditionsOptions" th:if="${fragment.api == 'CONDITIONS'}" >
+
+                    <div class="form-group w-50">
+                        <label for="condition">Condition *</label>
+                        <input th:field="*{primaryEntityName}"
+                               th:classappend="${#fields.hasErrors('primaryEntityName')} ? 'is-invalid' : ''"
+                               type="text"
+                               class="form-control"
+                               id="condition"
+                               placeholder="The condition name">
+                        <div th:if="${#fields.hasErrors('primaryEntityName')}" th:errors="*{primaryEntityName}" class="invalid-feedback"></div>
+                    </div>
+
+                </span>
+
+                <span id="livewellOptions" th:if="${fragment.api == 'LIVE_WELL'}">
+
+                    <div class="form-group w-50">
+
+                        <label for="topic">Topic *</label>
+                        <input th:field="*{primaryEntityName}"
+                               th:classappend="${#fields.hasErrors('primaryEntityName')} ? 'is-invalid' : ''"
+                               type="text"
+                               class="form-control"
+                               id="topic"
+                               placeholder="The live well topic">
+                        <div th:if="${#fields.hasErrors('primaryEntityName')}" th:errors="*{primaryEntityName}" class="invalid-feedback"></div>
+                    </div>
+
+                </span>
+
+                <div class="form-group w-50">
+                    <label for="page">Page</label>
+                    <input th:field="*{secondaryEntityName}"
+                           th:classappend="${#fields.hasErrors('secondaryEntityName')} ? 'is-invalid' : ''"
+                           type="text"
+                           class="form-control"
+                           id="page"
+                           placeholder="Optionally provide a specific topic page">
+                    <div th:if="${#fields.hasErrors('secondaryEntityName')}" th:errors="*{secondaryEntityName}" class="invalid-feedback"></div>
+                </div>
+
+                <div class="form-group w-50">
+                    <label for="jsonSectionHeading">Section Heading *</label>
+                    <input th:field="*{jsonSectionHeading}"
+                           th:classappend="${#fields.hasErrors('jsonSectionHeading')} ? 'is-invalid' : ''"
+                           type="text"
+                           class="form-control"
+                           id="jsonSectionHeading"
+                           placeholder="Section Heading">
+                    <div th:if="${#fields.hasErrors('jsonSectionHeading')}" th:errors="*{jsonSectionHeading}" class="invalid-feedback"></div>
+                </div>
+
+                <div class="form-group w-25">
+                    <label for="jsonMainEntityPosition">Main Entity Position *</label>
+                    <input th:field="*{jsonMainEntityPosition}"
+                           th:classappend="${#fields.hasErrors('jsonMainEntityPosition')} ? 'is-invalid' : ''"
+                           type="number"
+                           class="form-control"
+                           id="jsonMainEntityPosition"
+                           placeholder="Numeric Value, starting from 0">
+                    <div th:if="${#fields.hasErrors('jsonMainEntityPosition')}" th:errors="*{jsonMainEntityPosition}" class="invalid-feedback"></div>
+                </div>
+
+                <button type="submit" value="cancel" name="action" class="btn btn-primary">Cancel</button>
+                <button type="submit" value="submitFragment" name="action" class="btn btn-primary">Submit</button>
+
+            </form>
+
+        </section>
+
+    </body>
+
+</html>

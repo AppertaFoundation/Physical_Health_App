@@ -1,0 +1,9 @@
+{
+  "relatedLink": [
+    {
+      "alternativeHeadline": "Overview",
+      "url": "/conditions/example/",
+      "@type": "LinkRole",
+      "name": "Example",
+      "linkRelationship": "Navigation"
+}
