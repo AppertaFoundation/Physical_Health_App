@@ -21,7 +21,7 @@
         <!-- dependency versions -->
         <awaitility.version>3.1.6</awaitility.version>
         <checkstyle.plugin.version>3.0.0</checkstyle.plugin.version>
-        <commons-compress.version>1.18</commons-compress.version>
+        <commons-compress.version>1.19</commons-compress.version>
         <commons-io.version>2.6</commons-io.version>
         <commons.lang.version>3.8.1</commons.lang.version>
         <dockerfile.maven.plugin.version>1.4.9</dockerfile.maven.plugin.version>
